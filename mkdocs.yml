@@ -1,0 +1,18 @@
+site_name: Python Kivy创建Apps
+site_author: 徐静
+site_favicon: icon.ico
+repo_url: https://github.com/DataXujing/create_apps_in_kivy/
+pages:
+  - 关于: about.md
+  - 前言: index.md
+  - 第一章 Kivy简介: chapter1.md
+  - 第二章 涂鸦画板项目基于kivy实现: chapter2.md
+  - 第三章 涂鸦画板项目基于kivymd实现: chapter3.md
+  - 第四章 智能车道线检测项目(基于Kivy): chapter4.md
+  - 第五章 基于生成对抗网络(GAN)的一键现实转换二次元动画场景迁移项目(基于Kivymd): chapter5.md
+  - 第六章 pyinstaller打包Windows桌面应用程序: chapter6.md
+  - 第七章 setupfactory安装程序打包: chapter7.md
+  - 第八章 p4a Android打包基于kivy的涂鸦画板项目: chapter8.md
+  - 第九章 buildozer Android打包基于kivymd的涂鸦画板项目: chapter9.md
+  - 第十章 总结及项目展示: chapter10.md
+theme: readthedocs

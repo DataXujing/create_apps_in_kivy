@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="徐静">
+  <link rel="shortcut icon" href="../icon.ico">
+  
+  <title>第八章 p4a Android打包基于kivy的涂鸦画板项目 - Python Kivy创建Apps</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "\u7b2c\u516b\u7ae0 p4a Android\u6253\u5305\u57fa\u4e8ekivy\u7684\u6d82\u9e26\u753b\u677f\u9879\u76ee";
+    var mkdocs_page_input_path = "chapter8.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Python Kivy创建Apps</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../about/">关于</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">前言</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../chapter1/">第一章 Kivy简介</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../chapter2/">第二章 涂鸦画板项目基于kivy实现</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../chapter3/">第三章 涂鸦画板项目基于kivymd实现</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../chapter4/">第四章 智能车道线检测项目(基于Kivy)</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../chapter5/">第五章 基于生成对抗网络(GAN)的一键现实转换二次元动画场景迁移项目(基于Kivymd)</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../chapter6/">第六章 pyinstaller打包Windows桌面应用程序</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../chapter7/">第七章 setupfactory安装程序打包</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">第八章 p4a Android打包基于kivy的涂鸦画板项目</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#p4a-androidkivy">第八章 p4a Android打包基于kivy的涂鸦画板项目</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#1kivyp4a">1.基于Kivy开发的涂鸦画板项目的p4a安卓打包及项目演示</a></li>
+        
+            <li><a class="toctree-l3" href="#2mumuadb_serverexe">2.MUMU安卓模拟器及adb_server.exe调试</a></li>
+        
+            <li><a class="toctree-l3" href="#3adb">3.adb安卓调试</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../chapter9/">第九章 buildozer Android打包基于kivymd的涂鸦画板项目</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../chapter10/">第十章 总结及项目展示</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Python Kivy创建Apps</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>第八章 p4a Android打包基于kivy的涂鸦画板项目</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/DataXujing/create_apps_in_kivy/edit/master/docs/chapter8.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h2 id="p4a-androidkivy">第八章 p4a Android打包基于kivy的涂鸦画板项目</h2>
+<hr />
+<p>python-for-android简称p4a是kivy应用打包成apk的一种方法，使用p4a需要手动下载Android SDK和Android NDK的安装包，随后安装构建工具，配置SDK和NDK的环境变量，值得注意的是该方法只能在Linux平台上打包，关于安装和p4a的介绍，可以参考<a href="https://python-for-android.readthedocs.io/en/latest/">https://python-for-android.readthedocs.io/en/latest/</a>,如果需要本课程将提供一个已经完全设置好饿虚拟机，该虚拟机来源于《Python+kivy(App开发)从入门到实践》</p>
+<div align=center>
+<img src="../img/ch8/p1.png" /> 
+</div>
+
+<h3 id="1kivyp4a">1.基于Kivy开发的涂鸦画板项目的p4a安卓打包及项目演示</h3>
+<p>首先通过如下命令清除其他apk中的builds和dists文件夹，对于同一个apk,该命令只执行一次即可。</p>
+<pre><code>p4a clean_builds &amp;&amp; p4a clean_dists
+
+</code></pre>
+
+<pre><code>kivydev@kivydev-VirtualBox:~/test/paint$ p4a clean_builds &amp;&amp; p4a clean_dists
+[INFO]:    Reading .p4a configuration
+[INFO]:    Recipe python3crystax: version &quot;3.6&quot; requested
+[INFO]:    Reading .p4a configuration
+[INFO]:    Recipe python3crystax: version &quot;3.6&quot; requested
+
+</code></pre>
+
+<p>自动生成的<code>.p4a</code>文件，如下：</p>
+<pre><code>--dist_name Paint
+--android_api 19
+--minsdk 19
+--sdk_dir /home/kivydev/andr/android-sdk-linux
+--ndk_dir /home/kivydev/andr/crystax-ndk-10.3.2
+
+--arch armeabi-v7a
+--requirements python3crystax==3.6,kivy
+--private .
+--package com.xujing.paint
+--name paint
+--version 1.0
+--orientation landscape 
+--bootstrap sdl2 
+--icon icon.png
+
+</code></pre>
+
+<p>随后通过以下命令打包apk</p>
+<pre><code>p4a apk --debug
+</code></pre>
+
+<pre><code>[INFO]:    Reading .p4a configuration
+[INFO]:    Recipe python3crystax: version &quot;3.6&quot; requested
+[INFO]:    Will compile for the following archs: armeabi-v7a
+[INFO]:    Getting Android API version from user argument
+[INFO]:    Available Android APIs are (19, 23, 27)
+[INFO]:    Requested API target 19 is available, continuing.
+[INFO]:    Getting NDK dir from from user argument
+[INFO]:    Got NDK version from $ANDROIDNDKVER
+[INFO]:    Got Android NDK version from the NDK dir: it is 10.3.2
+[INFO]:    Using Crystax NDK 10.3.2
+[INFO]:    Found virtualenv at /usr/bin/virtualenv
+[INFO]:    Found the following toolchain versions: ['4.9', '5', 'clang3.6', 'clang3.7']
+[INFO]:    Picking the latest gcc toolchain, here 5
+[INFO]:    Of the existing distributions, the following meet the given requirements:
+[INFO]:     Paint: includes recipes (hostpython3crystax, sdl2_image, sdl2_mixer, sdl2_ttf, python3crystax, sdl2, six, pyjnius, kivy), built for archs (armeabi-v7a)
+[INFO]:    Paint has compatible recipes, using this one
+[INFO]:    Of the existing distributions, the following meet the given requirements:
+[INFO]:     Paint: includes recipes (hostpython3crystax, sdl2_image, sdl2_mixer, sdl2_ttf, python3crystax, sdl2, six, pyjnius, kivy), built for archs (armeabi-v7a)
+[INFO]:    Paint has compatible recipes, using this one
+Could not find hostpython, will not compile to .pyo (this is normal with python3)
+[INFO]:    -&gt; directory context /home/kivydev/.local/share/python-for-android/dists/Paint
+No compiled python is present to zip, skipping.
+this should only be the case if you are using the CrystaX python
+[INFO]:    Selecting java build tool:
+[INFO]:    Detected highest available build tools version to be 28.0.3
+[INFO]:        Building with gradle, as gradle executable is present
+[DEBUG]:   -&gt; running gradlew assembleDebug
+[DEBUG]:    &gt; Configuring &gt; 0/1 projects &gt; root project &gt; Resolving dependenIncremental java compilation is an incubating feature.
+[DEBUG]:    :preBuild UP-TO-DATE
+[DEBUG]:    :preDebugBuild UP-TO-DATE
+[DEBUG]:    :checkDebugManifest
+[DEBUG]:    :prepareDebugDependencies
+[DEBUG]:    :compileDebugAidl UP-TO-DATE
+[DEBUG]:    :compileDebugRenderscript UP-TO-DATE
+[DEBUG]:    :generateDebugBuildConfig UP-TO-DATE
+[DEBUG]:    :generateDebugResValues UP-TO-DATE
+[DEBUG]:    :generateDebugResources UP-TO-DATE
+[DEBUG]:    :mergeDebugResources
+[DEBUG]:    :processDebugManifest UP-TO-DATE
+[DEBUG]:    :processDebugResources
+[DEBUG]:    :generateDebugSources
+[DEBUG]:    :incrementalDebugJavaCompilationSafeguard UP-TO-DATE
+[DEBUG]:    :javaPreCompileDebug
+[DEBUG]:    :compileDebugJavaWithJavac UP-TO-DATE
+[DEBUG]:    :compileDebugNdk UP-TO-DATE
+[DEBUG]:    :compileDebugSources UP-TO-DATE
+[DEBUG]:    :mergeDebugShaders UP-TO-DATE
+[DEBUG]:    :compileDebugShaders UP-TO-DATE
+[DEBUG]:    :generateDebugAssets UP-TO-DATE
+[DEBUG]:    :mergeDebugAssets
+[DEBUG]:    :transformClassesWithDexForDebug UP-TO-DATE
+[DEBUG]:    :mergeDebugJniLibFolders UP-TO-DATE
+[DEBUG]:    :transformNativeLibsWithMergeJniLibsForDebug UP-TO-DATE
+[DEBUG]:    :transformNativeLibsWithStripDebugSymbolForDebug UP-TO-DATE
+[DEBUG]:    :processDebugJavaRes UP-TO-DATE
+[DEBUG]:    :transformResourcesWithMergeJavaResForDebug UP-TO-DATE
+[DEBUG]:    :validateSigningDebug
+[DEBUG]:    :packageDebug
+[DEBUG]:    :assembleDebug
+[DEBUG]:    
+[DEBUG]:    BUILD SUCCESSFUL
+[DEBUG]:    
+[DEBUG]:    Total time: 6.116 secs
+[DEBUG]:    
+[INFO]:    &lt;- directory context /home/kivydev/test/paint
+[INFO]:    # Copying APK to current directory
+[INFO]:    # APK filename not found in build output, trying to guess
+[INFO]:    # Found APK file: /home/kivydev/.local/share/python-for-android/dists/Paint/build/outputs/apk/Paint-debug.apk
+[INFO]:    # Add version number to APK
+[INFO]:    # APK renamed to Paint-1.0-debug.apk
+[DEBUG]:   -&gt; running cp /home/kivydev/.local/share/python-for-android/dists/Paint/build/outputs/apk/Paint-debug.apk Paint-1.0-debug.apk
+
+</code></pre>
+
+<p>打包完成后会生成apk文件，把apk文件复制到共享文件夹，并在手机或安卓模拟器中安装。</p>
+<div align=center>
+<img src="../img/ch8/p2.png" /> 
+</div>
+
+<h3 id="2mumuadb_serverexe">2.MUMU安卓模拟器及adb_server.exe调试</h3>
+<p>我们将打包好的apk文件安装在安卓模拟器，并通过安卓模拟器提供的adb_server.exe多apk进行调试</p>
+<p>首先我们将刚刚打包好的apk文件安装到安卓模拟器：</p>
+<div align=center >
+<img src="../img/ch8/p3.png" width=300 /> 
+</div>
+
+<p>打开我们安装的安卓程序</p>
+<div align=center >
+<img src="../img/ch8/p4.png"  /> 
+</div>
+
+<p>可以正常工作。</p>
+<p>我们通过MUMU安卓模拟器自带的adb_server.exe调试看一下后台运行的日志</p>
+<pre><code>cmd
+cd D:\soft_xj\MUMU\emulator\nemu\vmonitor\bin
+
+adb_server.exe connect 127.0.0.1:7555
+</code></pre>
+
+<div align=center >
+<img src="../img/ch8/p5.png"  /> 
+</div>
+
+<pre><code>adb_server.exe shell
+run-as com.xujing.paint
+cd files/app/.kivy/logs
+
+cat kivy_20-07-09_1.txt
+</code></pre>
+
+<div align=center >
+<img src="../img/ch8/p6.png"  /> 
+</div>
+
+<p>没有ERROR同时我们的安卓程序并没有闪退，运行正常，如果过程中我们的程序出现闪退或错误，请按照上述方式进行调试，寻找原因。</p>
+<h3 id="3adb">3.adb安卓调试</h3>
+<p>最后我们将p4a打包的安卓程序安装运行在我们的华为安卓手机上，首先我们经apk安装在我们的华为手机上</p>
+<div align=center >
+<img src="../img/ch8/p7.jpg"  /> 
+</div>
+
+<p>我们使用adb调试我们安卓手机上的apk应用</p>
+<pre><code>adb shell
+run-as com.xujing.paint
+cd files/app/.kivy/logs
+cat kivy_20-07-09_1.txt
+
+</code></pre>
+
+<div align=center >
+<img src="../img/ch8/p8.png"  /> 
+</div>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../chapter9/" class="btn btn-neutral float-right" title="第九章 buildozer Android打包基于kivymd的涂鸦画板项目">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../chapter7/" class="btn btn-neutral" title="第七章 setupfactory安装程序打包"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/DataXujing/create_apps_in_kivy/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../chapter7/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../chapter9/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+
+</body>
+</html>
