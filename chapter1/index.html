@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="徐静">
+  <link rel="shortcut icon" href="../icon.ico">
+  
+  <title>第一章 Kivy简介 - Python Kivy创建Apps</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "\u7b2c\u4e00\u7ae0 Kivy\u7b80\u4ecb";
+    var mkdocs_page_input_path = "chapter1.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Python Kivy创建Apps</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../about/">关于</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">前言</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">第一章 Kivy简介</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#kivy">第一章 Kivy简介</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#1kivykivypyqt5">1.kivy框架介绍及kivy与PyQt5</a></li>
+        
+            <li><a class="toctree-l3" href="#2kivy-b">2.kivy学习资源介绍(包括 官网，中文文档，书籍，B站资源分享）</a></li>
+        
+            <li><a class="toctree-l3" href="#3kivymd">3.kivymd的简单介绍</a></li>
+        
+            <li><a class="toctree-l3" href="#4apppyqt5">4.课程实现APP效果展示（包括PyQt5程序和本课程的程序)</a></li>
+        
+            <li><a class="toctree-l3" href="#53androidpyinstallernuitka">5.打包方式：3种android打包方式，pyinstaller和nuitka打包及其他们的优缺点</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../chapter2/">第二章 涂鸦画板项目基于kivy实现</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../chapter3/">第三章 涂鸦画板项目基于kivymd实现</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../chapter4/">第四章 智能车道线检测项目(基于Kivy)</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../chapter5/">第五章 基于生成对抗网络(GAN)的一键现实转换二次元动画场景迁移项目(基于Kivymd)</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../chapter6/">第六章 pyinstaller打包Windows桌面应用程序</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../chapter7/">第七章 setupfactory安装程序打包</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../chapter8/">第八章 p4a Android打包基于kivy的涂鸦画板项目</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../chapter9/">第九章 buildozer Android打包基于kivymd的涂鸦画板项目</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../chapter10/">第十章 总结及项目展示</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Python Kivy创建Apps</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>第一章 Kivy简介</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/DataXujing/create_apps_in_kivy/edit/master/docs/chapter1.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h2 id="kivy">第一章 Kivy简介</h2>
+<hr />
+<div align=center>
+<img src="../img/kivy-icon-256.png" /> 
+</div>
+
+<p><strong>图1-1：Kivy logo</strong></p>
+<h3 id="1kivykivypyqt5">1.kivy框架介绍及kivy与PyQt5</h3>
+<p>在Python中经常用于GUI开发的控件集有PyQt,Tkinter,wxPython,Kivy,PyGUI和Libavg.</p>
+<p>kivy(NUI):</p>
+<p>Kivy 是一个开源的 Python 框架(2011年)，用于快速开发应用，实现各种当前流行的用户界面，比如多点 触摸等等。 Kivy 可以运行于 Windows， Linux， MacOS， Android， iOS 等当前绝大部分主流桌面/移 动端操作系统。 Kivy 基于 Python，界面UI文件和程序文件相互分离的设计思路，设计简洁优雅，语法易学，适合新 人入门。 目前 Kivy 的官方文档还算很完善。</p>
+<p>PyQt5(GUI):</p>
+<p>PyQt5是一个用于创建GUI应用程序的跨平台的工具包，它将Python编程语言和Qt库成功融合在一起，PyQt5是由Phil Thompson开发的，实现了一个Python模块集，PyQt5拥有620多个类，将近6000个函数，PyQt也可以运行在所有的主流操作系统上,包括UNIX,Windows和MacOS</p>
+<p>如果你开发一个基于PC的应用，你可以使用kivy和PyQt5均可以，如果你开发一个基于iOS或Android的应用，建议你使用kivy. 我们将在本节课的结束演示两种开发工具开发的简单的应用。</p>
+<h3 id="2kivy-b">2.kivy学习资源介绍(包括 官网，中文文档，书籍，B站资源分享）</h3>
+<p>推荐书籍</p>
+<div align=center>
+<img src="../img/book.png" /> 
+</div>
+
+<p>推荐电子书</p>
+<ul>
+<li>
+<p><a href="https://cycleuser.gitbooks.io/kivy-guide-chinese/content/06-Kivy-Events%20and%20Properties.html">Kivy中文编程指南0</a></p>
+</li>
+<li>
+<p><a href="https://www.kancloud.cn/gthank/kivydoc/127793">Kivy官方文档翻译</a></p>
+</li>
+<li>
+<p><a href="https://www.bookstack.cn/read/Kivy-CN/README.md">kivy中文编程指南</a></p>
+</li>
+<li>
+<p><a href="https://kivy.org/#home">kivy官方文档</a></p>
+</li>
+<li>
+<p><a href="https://kivymd.readthedocs.io/en/latest/">kivymd官方文档</a></p>
+</li>
+<li>
+<p><a href="https://github.com/HeaTTheatR/KivyMD/wiki">kivymd官方demo</a></p>
+</li>
+</ul>
+<p>B站资源</p>
+<ul>
+<li>
+<p><a href="https://www.bilibili.com/video/BV1E4411Y74G?from=search&amp;seid=4330403371925229218">python制作APP，kivy教程(中文字幕)</a></p>
+</li>
+<li>
+<p><a href="https://www.bilibili.com/video/BV1JV411C7uF?from=search&amp;seid=4330403371925229218">使用python开发移动应用</a></p>
+</li>
+<li>
+<p><a href="https://www.bilibili.com/video/BV1g54y1Q7bV?from=search&amp;seid=4330403371925229218">Kivy Tutorial - 使用python编写移动端app</a></p>
+</li>
+<li>
+<p><a href="https://www.bilibili.com/video/BV1bf4y1S7C3?from=search&amp;seid=4330403371925229218">Building a POS System with Python and Kivy</a></p>
+</li>
+</ul>
+<h3 id="3kivymd">3.kivymd的简单介绍</h3>
+<p>kivymd是与Kivy跨平台图形框架一起使用的与Material Design（材料设计语言）兼容的窗口小部件的集合， 该框架是用于跨平台，启用触摸的图形应用程序的框架。目标是在不牺牲易用性或应用程序性能的前提下，尽可能接近Google的Material Design规范。
+使用kivymd可以使得在实现炫酷的应用的同时不会增加额外的代码量。</p>
+<h3 id="4apppyqt5">4.课程实现APP效果展示（包括PyQt5程序和本课程的程序)</h3>
+<ul>
+<li>
+<p>PyQt5： AI京剧换脸项目</p>
+</li>
+<li>
+<p>kivy: 智能车道线检测项目</p>
+</li>
+<li>
+<p>kivymd: 二次元场景迁移项目</p>
+</li>
+</ul>
+<h3 id="53androidpyinstallernuitka">5.打包方式：3种android打包方式，pyinstaller和nuitka打包及其他们的优缺点</h3>
+<p>Android打包： </p>
+<ul>
+<li>kivy Launcher(不能生成apk安装包，我尝试了很多官方的例子都没有成功，我们也会为大家提供安卓包)</li>
+<li>buildozer(官方推荐的打包方式，基于p4a)</li>
+<li>p4a</li>
+</ul>
+<p>PC打包：</p>
+<ul>
+<li>pyinstaller</li>
+<li>nuitka</li>
+</ul>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../chapter2/" class="btn btn-neutral float-right" title="第二章 涂鸦画板项目基于kivy实现">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href=".." class="btn btn-neutral" title="前言"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/DataXujing/create_apps_in_kivy/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href=".." style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../chapter2/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+
+</body>
+</html>
