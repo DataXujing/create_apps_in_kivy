@@ -1,5 +1,5 @@
 
-### 基于Kivy的NUI跨平台APP开发实战 <img src="logo.png" align="right" alt="logo" height="150" width="100" />
+### 基于Kivy的NUI跨平台APP开发实战 <img src="logo.png" align="right" alt="logo" height="150" width="150" />
 
 B站课程 | DataXujing 
 
