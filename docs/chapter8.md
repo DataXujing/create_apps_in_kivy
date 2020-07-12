@@ -201,3 +201,28 @@ cat kivy_20-07-09_1.txt
 <img src="../img/ch8/p8.png"  /> 
 </div>
 
+
+### 4.关于基于p4a打包基于kivymd的涂鸦画板
+
+`.p4a`
+
+```
+--dist_name PaintMD
+--android_api 19
+--minsdk 19
+--sdk_dir /home/kivydev/andr/android-sdk-linux
+--ndk_dir /home/kivydev/andr/crystax-ndk-10.3.2
+
+--arch armeabi-v7a
+--requirements python3crystax==3.6,kivy,kivymd
+--private .
+--package com.xujing.paintmd
+--name paintmd
+--version 1.0
+--orientation landscape 
+--bootstrap sdl2 
+--icon icon.png
+
+```
+
+打包和调试的方式与上文方式相同。
