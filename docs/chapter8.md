@@ -2,7 +2,7 @@
 
 ------
 
-python-for-android简称p4a是kivy应用打包成apk的一种方法，使用p4a需要手动下载Android SDK和Android NDK的安装包，随后安装构建工具，配置SDK和NDK的环境变量，值得注意的是该方法只能在Linux平台上打包，关于安装和p4a的介绍，可以参考<https://python-for-android.readthedocs.io/en/latest/>,如果需要本课程将提供一个已经完全设置好饿虚拟机，该虚拟机来源于《Python+kivy(App开发)从入门到实践》
+python-for-android简称p4a是kivy应用打包成apk的一种方法，使用p4a需要手动下载Android SDK和Android NDK的安装包，随后安装构建工具，配置SDK和NDK的环境变量，值得注意的是该方法只能在Linux平台上打包，关于安装和p4a的介绍，可以参考<https://python-for-android.readthedocs.io/en/latest/>,如果需要本课程将提供一个已经完全设置好的虚拟机，该虚拟机来源于《Python+kivy(App开发)从入门到实践》
 
 
 <div align=center>
@@ -202,27 +202,7 @@ cat kivy_20-07-09_1.txt
 </div>
 
 
-### 4.关于基于p4a打包基于kivymd的涂鸦画板
 
-`.p4a`
 
-```
---dist_name PaintMD
---android_api 19
---minsdk 19
---sdk_dir /home/kivydev/andr/android-sdk-linux
---ndk_dir /home/kivydev/andr/crystax-ndk-10.3.2
 
---arch armeabi-v7a
---requirements python3crystax==3.6,kivy,kivymd
---private .
---package com.xujing.paintmd
---name paintmd
---version 1.0
---orientation landscape 
---bootstrap sdl2 
---icon icon.png
 
-```
-
-打包和调试的方式与上文方式相同。

@@ -30,3 +30,4 @@
 + 基于kivymd的GAN一键现实转二次元动画场景迁移APP开发
 + kivy的安卓apk打包和Window可执行文件打包
 
+ 

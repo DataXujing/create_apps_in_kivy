@@ -381,4 +381,17 @@ BoxLayout:
 
 我们使用kivymd优化了kivy的UI界面，使其看起来更像是一个安卓或ios的NUI应用，对于UI方面的设计笔者并不精通，在真正的项目开发过程中，可以寻求公司UI设计师的帮助，基于UI设计师对于控件的设计，我们使用kivy或kivymd去实现。
 
-**TODO: p4a打包后在安卓模拟器上的使用效果**
+我们使用buildozer来打包我们的安卓应用程序，可以参考第9章的介绍，打包后的apk在安卓模拟器上的运行效果如下图所示：
+
+安卓模拟器上的效果：
+
+<div align=center>
+<img src="../img/ch3/p5.png" width=300 /> 
+</div>
+
+安卓手机上的效果：
+
+<div align=center>
+<img src="../img/ch3/p6.jpg" width=300/> 
+</div>
+

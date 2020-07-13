@@ -760,6 +760,7 @@ if __name__ == "__main__":
 
 ### 7.项目总结
 
+关于涂鸦画板项目的Android打包详见第八章。
 
 <div align=center>
 <img src="../img/ch8/p3.png" width=300 /> 
