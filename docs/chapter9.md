@@ -1152,3 +1152,5 @@ warn_on_root = 1
 
 
 ```
+
+关于打包release版本的android apk, 可以参考<https://github.com/kivy/kivy/wiki/Creating-a-Release-APK>

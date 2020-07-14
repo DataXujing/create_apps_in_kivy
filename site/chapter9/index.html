@@ -103,7 +103,17 @@
     <a class="current" href="./">第九章 buildozer Android打包基于kivymd的涂鸦画板项目</a>
     <ul class="subnav">
             
-    <li class="toctree-l2"><a href="#buildozer-androidkivymd">第九章 buildozer Android打包基于kivymd的涂鸦画板项目</a></li>
+    <li class="toctree-l2"><a href="#buildozer-android">第九章 buildozer Android打包</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#1kivymdbuildozeradb">1.基于kivymd的涂鸦画板的buildozer打包及在adb下进行安卓调试</a></li>
+        
+            <li><a class="toctree-l3" href="#2buildozeradb">2.基于智能车道线检测项目的buildozer安卓打包及adb安卓调试</a></li>
+        
+            <li><a class="toctree-l3" href="#3gankivymdbuildozeradb">3.生成对抗网络(GAN)的一键现实转换二次元动画场景迁移项目(基于Kivymd)buildozer安卓打包及adb安卓调试</a></li>
+        
+        </ul>
     
 
     </ul>
@@ -149,13 +159,1126 @@
           <div role="main">
             <div class="section">
               
-                <h2 id="buildozer-androidkivymd">第九章 buildozer Android打包基于kivymd的涂鸦画板项目</h2>
+                <h2 id="buildozer-android">第九章 buildozer Android打包</h2>
 <hr />
-<ul>
-<li>1.基于智能车道线检测项目的buildozer安卓打包及项目演示</li>
-<li>2.MUMU安卓模拟器及adb_server.exe调试</li>
-<li>3.adb 安卓调试</li>
-</ul>
+<p>本章我们将会在Linux环境下通过buildozer把写好的程序打包为在Android环境下可执行的文件，关于buildozer的安装可以参考官网的介绍，如果读者需要我们将共享我们配置好的buildozer的虚拟机环境，这样读者就免于重新配置环境，直接可以打包，但是我们建议读者自己搭建环境，这样对安卓打包会有更全面的认识。</p>
+<div align=center>
+<img src="../img/ch9/p2.png" /> 
+</div>
+
+<h3 id="1kivymdbuildozeradb">1.基于kivymd的涂鸦画板的buildozer打包及在adb下进行安卓调试</h3>
+<h4 id="1kivymdbuildozer">1.基于kivymd的涂鸦画板的buildozer打包及项目演示</h4>
+<p>配置好环境后，通过cd命令进入需要打包的项目的同级目录中，执行以下命令生成buildozer.spec配置文件：</p>
+<pre><code>buildozer init
+</code></pre>
+
+<p>然后按照如下方式编辑配置文件：</p>
+<pre><code>[app]
+
+# (str) Title of your application
+title = 涂鸦画板md                #&lt;----------------应用名称
+
+# (str) Package name
+package.name = paintmd
+
+# (str) Package domain (needed for android/ios packaging)
+package.domain = com.xujing       # &lt;---------------域名
+
+# (str) Source code where the main.py live
+source.dir = .
+
+# (list) Source files to include (let empty to include all the files)
+source.include_exts = py,png,jpg,kv,atlas,ico,ttf  # &lt;--------------需要打包进来的文件的扩展名
+
+# (list) List of inclusions using pattern matching
+#source.include_patterns = assets/*,images/*.png
+
+# (list) Source files to exclude (let empty to not exclude anything)
+#source.exclude_exts = spec
+
+# (list) List of directory to exclude (let empty to not exclude anything)
+#source.exclude_dirs = tests, bin, venv
+
+# (list) List of exclusions using pattern matching
+#source.exclude_patterns = license,images/*/*.jpg
+
+# (str) Application versioning (method 1)
+version = 1.0.0
+
+# (str) Application versioning (method 2)
+# version.regex = __version__ = ['&quot;](.*)['&quot;]
+# version.filename = %(source.dir)s/main.py
+
+# (list) Application requirements
+# comma separated e.g. requirements = sqlite3,kivy
+requirements = python3==3.7.5,hostpython3==3.7.5,kivy,kivymd #&lt;----------应用依赖包，非常重要，大部分闪退都是因为具体的依赖包没有打进来
+
+# (str) Custom source folders for requirements
+# Sets custom source for any requirements with recipes
+# requirements.source.kivy = ../../kivy
+
+# (str) Presplash of the application
+#presplash.filename = %(source.dir)s/data/presplash.png
+
+# (str) Icon of the application
+#icon.filename = %(source.dir)s/data/icon.png
+icon.filename = icon.png   #&lt;--------------------应用的图标
+
+# (str) Supported orientation (one of landscape, sensorLandscape, portrait or all)
+orientation = portrait
+
+# (list) List of service to declare
+#services = NAME:ENTRYPOINT_TO_PY,NAME2:ENTRYPOINT2_TO_PY
+
+#
+# OSX Specific
+#
+
+#
+# author = © Copyright Info
+
+# change the major version of python used by the app
+osx.python_version = 3
+
+# Kivy version to use
+osx.kivy_version = 1.9.1
+
+#
+# Android specific
+#
+
+# (bool) Indicate if the application should be fullscreen or not
+fullscreen = 0   # &lt;---------------全屏显示1，非全屏0
+
+# (string) Presplash background color (for new android toolchain)
+# Supported formats are: #RRGGBB #AARRGGBB or one of the following names:
+# red, blue, green, black, white, gray, cyan, magenta, yellow, lightgray,
+# darkgray, grey, lightgrey, darkgrey, aqua, fuchsia, lime, maroon, navy,
+# olive, purple, silver, teal.
+#android.presplash_color = #FFFFFF
+
+# (list) Permissions
+#android.permissions = INTERNET  # &lt;----------- 安卓的权限，这个也需要根据自己的应用去设置
+
+# (int) Target Android API, should be as high as possible.
+#android.api = 27
+
+# (int) Minimum API your APK will support.
+#android.minapi = 21
+
+# (int) Android SDK version to use
+#android.sdk = 20
+
+# (str) Android NDK version to use
+#android.ndk = 19b
+
+# (int) Android NDK API to use. This is the minimum API your app will support, it should usually match android.minapi.
+#android.ndk_api = 21
+
+# (bool) Use --private data storage (True) or --dir public storage (False)
+#android.private_storage = True
+
+# (str) Android NDK directory (if empty, it will be automatically downloaded.)
+#android.ndk_path =
+
+# (str) Android SDK directory (if empty, it will be automatically downloaded.)
+#android.sdk_path =
+
+# (str) ANT directory (if empty, it will be automatically downloaded.)
+#android.ant_path =
+
+# (bool) If True, then skip trying to update the Android sdk
+# This can be useful to avoid excess Internet downloads or save time
+# when an update is due and you just want to test/build your package
+# android.skip_update = False
+
+# (bool) If True, then automatically accept SDK license
+# agreements. This is intended for automation only. If set to False,
+# the default, you will be shown the license when first running
+# buildozer.
+# android.accept_sdk_license = False
+
+# (str) Android entry point, default is ok for Kivy-based app
+#android.entrypoint = org.renpy.android.PythonActivity
+
+# (str) Android app theme, default is ok for Kivy-based app
+# android.apptheme = &quot;@android:style/Theme.NoTitleBar&quot;
+
+# (list) Pattern to whitelist for the whole project
+#android.whitelist =
+
+# (str) Path to a custom whitelist file
+#android.whitelist_src =
+
+# (str) Path to a custom blacklist file
+#android.blacklist_src =
+
+# (list) List of Java .jar files to add to the libs so that pyjnius can access
+# their classes. Don't add jars that you do not need, since extra jars can slow
+# down the build process. Allows wildcards matching, for example:
+# OUYA-ODK/libs/*.jar
+#android.add_jars = foo.jar,bar.jar,path/to/more/*.jar
+
+# (list) List of Java files to add to the android project (can be java or a
+# directory containing the files)
+#android.add_src =
+
+# (list) Android AAR archives to add (currently works only with sdl2_gradle
+# bootstrap)
+#android.add_aars =
+
+# (list) Gradle dependencies to add (currently works only with sdl2_gradle
+# bootstrap)
+#android.gradle_dependencies =
+
+# (list) add java compile options
+# this can for example be necessary when importing certain java libraries using the 'android.gradle_dependencies' option
+# see https://developer.android.com/studio/write/java8-support for further information
+# android.add_compile_options = &quot;sourceCompatibility = 1.8&quot;, &quot;targetCompatibility = 1.8&quot;
+
+# (list) Gradle repositories to add {can be necessary for some android.gradle_dependencies}
+# please enclose in double quotes 
+# e.g. android.gradle_repositories = &quot;maven { url 'https://kotlin.bintray.com/ktor' }&quot;
+#android.add_gradle_repositories =
+
+# (list) packaging options to add 
+# see https://google.github.io/android-gradle-dsl/current/com.android.build.gradle.internal.dsl.PackagingOptions.html
+# can be necessary to solve conflicts in gradle_dependencies
+# please enclose in double quotes 
+# e.g. android.add_packaging_options = &quot;exclude 'META-INF/common.kotlin_module'&quot;, &quot;exclude 'META-INF/*.kotlin_module'&quot;
+#android.add_gradle_repositories =
+
+# (list) Java classes to add as activities to the manifest.
+#android.add_activities = com.example.ExampleActivity
+
+# (str) OUYA Console category. Should be one of GAME or APP
+# If you leave this blank, OUYA support will not be enabled
+#android.ouya.category = GAME
+
+# (str) Filename of OUYA Console icon. It must be a 732x412 png image.
+#android.ouya.icon.filename = %(source.dir)s/data/ouya_icon.png
+
+# (str) XML file to include as an intent filters in &lt;activity&gt; tag
+#android.manifest.intent_filters =
+
+# (str) launchMode to set for the main activity
+#android.manifest.launch_mode = standard
+
+# (list) Android additional libraries to copy into libs/armeabi
+#android.add_libs_armeabi = libs/android/*.so
+#android.add_libs_armeabi_v7a = libs/android-v7/*.so
+#android.add_libs_arm64_v8a = libs/android-v8/*.so
+#android.add_libs_x86 = libs/android-x86/*.so
+#android.add_libs_mips = libs/android-mips/*.so
+
+# (bool) Indicate whether the screen should stay on
+# Don't forget to add the WAKE_LOCK permission if you set this to True
+#android.wakelock = False
+
+# (list) Android application meta-data to set (key=value format)
+#android.meta_data =
+
+# (list) Android library project to add (will be added in the
+# project.properties automatically.)
+#android.library_references =
+
+# (list) Android shared libraries which will be added to AndroidManifest.xml using &lt;uses-library&gt; tag
+#android.uses_library =
+
+# (str) Android logcat filters to use
+#android.logcat_filters = *:S python:D
+
+# (bool) Copy library instead of making a libpymodules.so
+#android.copy_libs = 1
+
+# (str) The Android arch to build for, choices: armeabi-v7a, arm64-v8a, x86, x86_64
+android.arch = armeabi-v7a
+
+# (int) overrides automatic versionCode computation (used in build.gradle)
+# this is not the same as app version and should only be edited if you know what you're doing
+# android.numeric_version = 1
+
+#
+# Python for android (p4a) specific
+#
+
+# (str) python-for-android fork to use, defaults to upstream (kivy)
+#p4a.fork = kivy
+
+# (str) python-for-android branch to use, defaults to master
+#p4a.branch = master
+
+# (str) python-for-android git clone directory (if empty, it will be automatically cloned from github)
+#p4a.source_dir =
+
+# (str) The directory in which python-for-android should look for your own build recipes (if any)
+#p4a.local_recipes =
+
+# (str) Filename to the hook for p4a
+#p4a.hook =
+
+# (str) Bootstrap to use for android builds
+# p4a.bootstrap = sdl2
+
+# (int) port number to specify an explicit --port= p4a argument (eg for bootstrap flask)
+#p4a.port =
+
+
+#
+# iOS specific
+#
+
+# (str) Path to a custom kivy-ios folder
+#ios.kivy_ios_dir = ../kivy-ios
+# Alternately, specify the URL and branch of a git checkout:
+ios.kivy_ios_url = https://github.com/kivy/kivy-ios
+ios.kivy_ios_branch = master
+
+# Another platform dependency: ios-deploy
+# Uncomment to use a custom checkout
+#ios.ios_deploy_dir = ../ios_deploy
+# Or specify URL and branch
+ios.ios_deploy_url = https://github.com/phonegap/ios-deploy
+ios.ios_deploy_branch = 1.10.0
+
+# (bool) Whether or not to sign the code
+ios.codesign.allowed = false
+
+# (str) Name of the certificate to use for signing the debug version
+# Get a list of available identities: buildozer ios list_identities
+#ios.codesign.debug = &quot;iPhone Developer: &lt;lastname&gt; &lt;firstname&gt; (&lt;hexstring&gt;)&quot;
+
+# (str) Name of the certificate to use for signing the release version
+#ios.codesign.release = %(ios.codesign.debug)s
+
+
+[buildozer]
+
+# (int) Log level (0 = error only, 1 = info, 2 = debug (with command output))
+log_level = 2
+
+# (int) Display warning if buildozer is run as root (0 = False, 1 = True)
+warn_on_root = 1
+
+# (str) Path to build artifact storage, absolute or relative to spec file
+# build_dir = ./.buildozer
+
+# (str) Path to build output (i.e. .apk, .ipa) storage
+# bin_dir = ./bin
+
+#    -----------------------------------------------------------------------------
+#    List as sections
+#
+#    You can define all the &quot;list&quot; as [section:key].
+#    Each line will be considered as a option to the list.
+#    Let's take [app] / source.exclude_patterns.
+#    Instead of doing:
+#
+#[app]
+#source.exclude_patterns = license,data/audio/*.wav,data/images/original/*
+#
+#    This can be translated into:
+#
+#[app:source.exclude_patterns]
+#license
+#data/audio/*.wav
+#data/images/original/*
+#
+
+
+#    -----------------------------------------------------------------------------
+#    Profiles
+#
+#    You can extend section / key with a profile
+#    For example, you want to deploy a demo version of your application without
+#    HD content. You could first change the title to add &quot;(demo)&quot; in the name
+#    and extend the excluded directories to remove the HD content.
+#
+#[app@demo]
+#title = My Application (demo)
+#
+#[app:source.exclude_patterns@demo]
+#images/hd/*
+#
+#    Then, invoke the command line with the &quot;demo&quot; profile:
+#
+#buildozer --profile demo android debug
+
+
+</code></pre>
+
+<p>在项目中添加的依赖包一定要写到requirements中，再通过以下命令生成一个debug版本的apk文件</p>
+<pre><code>buildozer -v android debug
+</code></pre>
+
+<p>首次打包过程会很慢，请耐心等待保持网络畅通，直到出现如下的界面，打包完成：</p>
+<pre><code>[INFO]:    Detected highest available build tools version to be 30.0.0
+[DEBUG]:   -&gt; running gradlew assembleDebug
+[DEBUG]:    
+[DEBUG]:    Deprecated Gradle features were used in this build, making it incompatible with Gradle 7.0.
+[DEBUG]:    Use '--warning-mode all' to show the individual deprecation warnings.
+[DEBUG]:    See https://docs.gradle.org/6.4.1/userguide/command_line_interface.html#sec:command_line_warnings
+[DEBUG]:    
+[DEBUG]:    BUILD SUCCESSFUL in 2s
+[DEBUG]:    27 actionable tasks: 4 executed, 23 up-to-date
+
+[INFO]:    &lt;- directory context /home/kivymd/Desktop/paintmd/.buildozer/android/platform/python-for-android
+[INFO]:    Of the existing distributions, the following meet the given requirements:
+[INFO]:     paintmd: min API 21, includes recipes (hostpython3, libffi, openssl, sdl2_image, sdl2_mixer, sdl2_ttf, sqlite3, python3, sdl2, setuptools, six, pyjnius, android, kivy, kivymd, certifi), built for archs (armeabi-v7a)
+[INFO]:    paintmd has compatible recipes, using this one
+[INFO]:    # Copying android package to current directory
+[INFO]:    # Android package filename not found in build output. Guessing...
+[INFO]:    # Found android package file: /home/kivymd/Desktop/paintmd/.buildozer/android/platform/build-armeabi-v7a/dists/paintmd__armeabi-v7a/build/outputs/apk/debug/paintmd__armeabi-v7a-debug.apk
+[INFO]:    # Add version number to android package
+[INFO]:    # Android package renamed to paintmd__armeabi-v7a-debug-1.0.0-.apk
+[DEBUG]:   -&gt; running cp /home/kivymd/Desktop/paintmd/.buildozer/android/platform/build-armeabi-v7a/dists/paintmd__armeabi-v7a/build/outputs/apk/debug/paintmd__armeabi-v7a-debug.apk paintmd__armeabi-v7a-debug-1.0.0-.apk
+WARNING: Received a --sdk argument, but this argument is deprecated and does nothing.
+No setup.py/pyproject.toml used, copying full private data into .apk.
+Applying Java source code patches...
+Applying patch: src/patches/SDLActivity.java.patch
+Warning: failed to apply patch (exit code 1), assuming it is already applied:  src/patches/SDLActivity.java.patch
+# Android packaging done!
+# APK paintmd-1.0.0-armeabi-v7a-debug.apk available in the bin directory
+</code></pre>
+
+<p>打包完成后会在项目的bin目录下生成一个apk文件，更多命令可以参考官方文档。</p>
+<h4 id="2adb">2.adb 安卓调试</h4>
+<p>打包完成后生成的apk文件可以在安卓手机中安装使用，并通过adb调试。</p>
+<p>在安卓模拟器中的运行：</p>
+<div align=center>
+<img src="../img/ch9/p1.png"/> 
+</div>
+
+<p><br></p>
+<div align=center>
+<img src="../img/ch3/p5.png" width=300 /> 
+</div>
+
+<p>在安卓手机中的运行：</p>
+<div align=center>
+<img src="../img/ch9/p2.jpg" width=300 /> 
+</div>
+
+<p><br></p>
+<div align=center>
+<img src="../img/ch3/p6.jpg" width=300 /> 
+</div>
+
+<p>在adb下的调试功能：</p>
+<pre><code>adb connect 127.0.0.1:7555
+adb shell
+
+run-as com.xujing.paintmd
+
+cd files/app/.kivy/logs/
+cat kivy_20-07-13_0.txt
+</code></pre>
+
+<pre><code>
+[INFO   ] Logger: Record log in /data/user/0/com.xujing.paintmd/files/app/.kivy/logs/kivy_20-07-13_0.txt
+[WARNING] [Config      ] Upgrading configuration in progress.
+[WARNING] [Config      ] Older configuration version detected (0 instead of 21)
+[INFO   ] Kivy: v1.11.1
+[INFO   ] Kivy: Installed at &quot;/data/user/0/com.xujing.paintmd/files/app/_python_bundle/site-packages/kivy/__init__.pyc&quot;
+[INFO   ] Python: v3.7.5 (default, Jul  6 2020, 17:31:36)
+[Clang 8.0.2 (https://android.googlesource.com/toolchain/clang 40173bab62ec7462
+[INFO   ] Python: Interpreter at &quot;android_python&quot;
+[INFO   ] Factory: 184 symbols loaded
+[INFO   ] Image: Providers: img_tex, img_dds, img_sdl2, img_gif (img_pil, img_ffpyplayer ignored)
+[INFO   ] KivyMD: v0.104.1
+[INFO   ] Window: Provider: sdl2
+[INFO   ] GL: Using the &quot;OpenGL ES 2&quot; graphics system
+[INFO   ] GL: Backend used &lt;sdl2&gt;
+[INFO   ] GL: OpenGL version &lt;b'OpenGL ES 3.0 (MuMu GL, Powered by ANGLE 2.1.0.axccacxx)'&gt;
+[INFO   ] GL: OpenGL vendor &lt;b'NetEase'&gt;
+[INFO   ] GL: OpenGL renderer &lt;b'MuMu GL (NVIDIA GeForce GTX 1660 SUPER Direct3D11 vs_5_0 ps_5_0)'&gt;
+[INFO   ] GL: OpenGL parsed version: 3, 0
+[INFO   ] GL: Texture max size &lt;16384&gt;
+[INFO   ] GL: Texture max units &lt;16&gt;
+[INFO   ] Window: auto add sdl2 input provider
+[INFO   ] Window: virtual keyboard not allowed, single mode, not docked
+[INFO   ] Text: Provider: sdl2
+[INFO   ] GL: NPOT texture support is available
+[WARNING] Base: Unknown &lt;android&gt; provider
+[INFO   ] Base: Start application main loop
+</code></pre>
+
+<p>程序没有闪退退切日志记录基本没有问题。</p>
+<h3 id="2buildozeradb">2.基于智能车道线检测项目的buildozer安卓打包及adb安卓调试</h3>
+<h4 id="1buildozer">1.基于智能车道线检测项目的buildozer安卓打包及项目演示</h4>
+<p>智能车道线项目的安卓打包与上一节中介绍的完全一致，这里仅把<code>buildozer.spec</code>文件的内容做详细的介绍,其在安卓手机上的运行可以参考第4章或我们的在线课程演示</p>
+<pre><code>
+[app]
+
+# (str) Title of your application
+title = 车道线检测
+
+# (str) Package name
+package.name = myapp
+
+# (str) Package domain (needed for android/ios packaging)
+package.domain = com.xujing
+
+# (str) Source code where the main.py live
+source.dir = .
+
+# (list) Source files to include (let empty to include all the files)
+source.include_exts = py,png,jpg,kv,atlas,ico,ttf
+
+# (list) List of inclusions using pattern matching
+#source.include_patterns = assets/*,images/*.png
+source.include_patterns = static/*
+
+
+
+# (list) Source files to exclude (let empty to not exclude anything)
+#source.exclude_exts = spec
+
+# (list) List of directory to exclude (let empty to not exclude anything)
+#source.exclude_dirs = tests, bin, venv
+
+# (list) List of exclusions using pattern matching
+#source.exclude_patterns = license,images/*/*.jpg
+
+# (str) Application versioning (method 1)
+version = 1.0.0
+
+# (str) Application versioning (method 2)
+# version.regex = __version__ = ['&quot;](.*)['&quot;]
+# version.filename = %(source.dir)s/main.py
+
+# (list) Application requirements
+# comma separated e.g. requirements = sqlite3,kivy
+requirements = python3,kivy,numpy,opencv
+
+# (str) Custom source folders for requirements
+# Sets custom source for any requirements with recipes
+# requirements.source.kivy = ../../kivy
+
+# (str) Presplash of the application
+#presplash.filename = %(source.dir)s/data/presplash.png
+
+# (str) Icon of the application
+icon.filename = %(source.dir)s/static/icon.png
+
+# (str) Supported orientation (one of landscape, sensorLandscape, portrait or all)
+orientation = portrait
+
+# (list) List of service to declare
+#services = NAME:ENTRYPOINT_TO_PY,NAME2:ENTRYPOINT2_TO_PY
+
+#
+# OSX Specific
+#
+
+#
+# author = © Copyright Info
+
+# change the major version of python used by the app
+osx.python_version = 3
+
+# Kivy version to use
+osx.kivy_version = 1.9.1
+
+#
+# Android specific
+#
+
+# (bool) Indicate if the application should be fullscreen or not
+fullscreen = 0
+
+# (string) Presplash background color (for new android toolchain)
+# Supported formats are: #RRGGBB #AARRGGBB or one of the following names:
+# red, blue, green, black, white, gray, cyan, magenta, yellow, lightgray,
+# darkgray, grey, lightgrey, darkgrey, aqua, fuchsia, lime, maroon, navy,
+# olive, purple, silver, teal.
+#android.presplash_color = #FFFFFF
+
+# (list) Permissions
+android.permissions = INTERNET,CAMERA,READ_EXTERNAL_STORAGE,WRITE_EXTERNAL_STORAGE
+
+# (int) Target Android API, should be as high as possible.
+#android.api = 27
+
+# (int) Minimum API your APK will support.
+#android.minapi = 21
+
+# (int) Android SDK version to use
+#android.sdk = 20
+
+# (str) Android NDK version to use
+#android.ndk = 19b
+
+# (int) Android NDK API to use. This is the minimum API your app will support, it should usually match android.minapi.
+#android.ndk_api = 21
+
+# (bool) Use --private data storage (True) or --dir public storage (False)
+#android.private_storage = True
+
+# (str) Android NDK directory (if empty, it will be automatically downloaded.)
+#android.ndk_path =
+
+# (str) Android SDK directory (if empty, it will be automatically downloaded.)
+#android.sdk_path =
+
+# (str) ANT directory (if empty, it will be automatically downloaded.)
+#android.ant_path =
+
+# (bool) If True, then skip trying to update the Android sdk
+# This can be useful to avoid excess Internet downloads or save time
+# when an update is due and you just want to test/build your package
+# android.skip_update = False
+
+# (bool) If True, then automatically accept SDK license
+# agreements. This is intended for automation only. If set to False,
+# the default, you will be shown the license when first running
+# buildozer.
+# android.accept_sdk_license = False
+
+# (str) Android entry point, default is ok for Kivy-based app
+#android.entrypoint = org.renpy.android.PythonActivity
+
+# (str) Android app theme, default is ok for Kivy-based app
+# android.apptheme = &quot;@android:style/Theme.NoTitleBar&quot;
+
+# (list) Pattern to whitelist for the whole project
+#android.whitelist =
+
+# (str) Path to a custom whitelist file
+#android.whitelist_src =
+
+# (str) Path to a custom blacklist file
+#android.blacklist_src =
+
+# (list) List of Java .jar files to add to the libs so that pyjnius can access
+# their classes. Don't add jars that you do not need, since extra jars can slow
+# down the build process. Allows wildcards matching, for example:
+# OUYA-ODK/libs/*.jar
+#android.add_jars = foo.jar,bar.jar,path/to/more/*.jar
+
+# (list) List of Java files to add to the android project (can be java or a
+# directory containing the files)
+#android.add_src =
+
+# (list) Android AAR archives to add (currently works only with sdl2_gradle
+# bootstrap)
+#android.add_aars =
+
+# (list) Gradle dependencies to add (currently works only with sdl2_gradle
+# bootstrap)
+#android.gradle_dependencies =
+
+# (list) add java compile options
+# this can for example be necessary when importing certain java libraries using the 'android.gradle_dependencies' option
+# see https://developer.android.com/studio/write/java8-support for further information
+# android.add_compile_options = &quot;sourceCompatibility = 1.8&quot;, &quot;targetCompatibility = 1.8&quot;
+
+# (list) Gradle repositories to add {can be necessary for some android.gradle_dependencies}
+# please enclose in double quotes 
+# e.g. android.gradle_repositories = &quot;maven { url 'https://kotlin.bintray.com/ktor' }&quot;
+#android.add_gradle_repositories =
+
+# (list) packaging options to add 
+# see https://google.github.io/android-gradle-dsl/current/com.android.build.gradle.internal.dsl.PackagingOptions.html
+# can be necessary to solve conflicts in gradle_dependencies
+# please enclose in double quotes 
+# e.g. android.add_packaging_options = &quot;exclude 'META-INF/common.kotlin_module'&quot;, &quot;exclude 'META-INF/*.kotlin_module'&quot;
+#android.add_gradle_repositories =
+
+# (list) Java classes to add as activities to the manifest.
+#android.add_activities = com.example.ExampleActivity
+
+# (str) OUYA Console category. Should be one of GAME or APP
+# If you leave this blank, OUYA support will not be enabled
+#android.ouya.category = GAME
+
+# (str) Filename of OUYA Console icon. It must be a 732x412 png image.
+#android.ouya.icon.filename = %(source.dir)s/data/ouya_icon.png
+
+# (str) XML file to include as an intent filters in &lt;activity&gt; tag
+#android.manifest.intent_filters =
+
+# (str) launchMode to set for the main activity
+#android.manifest.launch_mode = standard
+
+# (list) Android additional libraries to copy into libs/armeabi
+#android.add_libs_armeabi = libs/android/*.so
+#android.add_libs_armeabi_v7a = libs/android-v7/*.so
+#android.add_libs_arm64_v8a = libs/android-v8/*.so
+#android.add_libs_x86 = libs/android-x86/*.so
+#android.add_libs_mips = libs/android-mips/*.so
+
+# (bool) Indicate whether the screen should stay on
+# Don't forget to add the WAKE_LOCK permission if you set this to True
+#android.wakelock = False
+
+# (list) Android application meta-data to set (key=value format)
+#android.meta_data =
+
+# (list) Android library project to add (will be added in the
+# project.properties automatically.)
+#android.library_references =
+
+# (list) Android shared libraries which will be added to AndroidManifest.xml using &lt;uses-library&gt; tag
+#android.uses_library =
+
+# (str) Android logcat filters to use
+#android.logcat_filters = *:S python:D
+
+# (bool) Copy library instead of making a libpymodules.so
+#android.copy_libs = 1
+
+# (str) The Android arch to build for, choices: armeabi-v7a, arm64-v8a, x86, x86_64
+android.arch = armeabi-v7a
+
+# (int) overrides automatic versionCode computation (used in build.gradle)
+# this is not the same as app version and should only be edited if you know what you're doing
+# android.numeric_version = 1
+
+#
+# Python for android (p4a) specific
+#
+
+# (str) python-for-android fork to use, defaults to upstream (kivy)
+#p4a.fork = kivy
+
+# (str) python-for-android branch to use, defaults to master
+#p4a.branch = master
+
+# (str) python-for-android git clone directory (if empty, it will be automatically cloned from github)
+#p4a.source_dir =
+
+# (str) The directory in which python-for-android should look for your own build recipes (if any)
+#p4a.local_recipes =
+
+# (str) Filename to the hook for p4a
+#p4a.hook =
+
+# (str) Bootstrap to use for android builds
+# p4a.bootstrap = sdl2
+
+# (int) port number to specify an explicit --port= p4a argument (eg for bootstrap flask)
+#p4a.port =
+
+
+#
+# iOS specific
+#
+
+# (str) Path to a custom kivy-ios folder
+#ios.kivy_ios_dir = ../kivy-ios
+# Alternately, specify the URL and branch of a git checkout:
+ios.kivy_ios_url = https://github.com/kivy/kivy-ios
+ios.kivy_ios_branch = master
+
+# Another platform dependency: ios-deploy
+# Uncomment to use a custom checkout
+#ios.ios_deploy_dir = ../ios_deploy
+# Or specify URL and branch
+ios.ios_deploy_url = https://github.com/phonegap/ios-deploy
+ios.ios_deploy_branch = 1.10.0
+
+# (bool) Whether or not to sign the code
+ios.codesign.allowed = false
+
+# (str) Name of the certificate to use for signing the debug version
+# Get a list of available identities: buildozer ios list_identities
+#ios.codesign.debug = &quot;iPhone Developer: &lt;lastname&gt; &lt;firstname&gt; (&lt;hexstring&gt;)&quot;
+
+# (str) Name of the certificate to use for signing the release version
+#ios.codesign.release = %(ios.codesign.debug)s
+
+
+[buildozer]
+
+# (int) Log level (0 = error only, 1 = info, 2 = debug (with command output))
+log_level = 2
+
+# (int) Display warning if buildozer is run as root (0 = False, 1 = True)
+warn_on_root = 1
+
+# (str) Path to build artifact storage, absolute or relative to spec file
+# build_dir = ./.buildozer
+
+# (str) Path to build output (i.e. .apk, .ipa) storage
+# bin_dir = ./bin
+
+#    -----------------------------------------------------------------------------
+#    List as sections
+#
+#    You can define all the &quot;list&quot; as [section:key].
+#    Each line will be considered as a option to the list.
+#    Let's take [app] / source.exclude_patterns.
+#    Instead of doing:
+#
+#[app]
+#source.exclude_patterns = license,data/audio/*.wav,data/images/original/*
+#
+#    This can be translated into:
+#
+#[app:source.exclude_patterns]
+#license
+#data/audio/*.wav
+#data/images/original/*
+#
+
+
+#    -----------------------------------------------------------------------------
+#    Profiles
+#
+#    You can extend section / key with a profile
+#    For example, you want to deploy a demo version of your application without
+#    HD content. You could first change the title to add &quot;(demo)&quot; in the name
+#    and extend the excluded directories to remove the HD content.
+#
+#[app@demo]
+#title = My Application (demo)
+#
+#[app:source.exclude_patterns@demo]
+#images/hd/*
+#
+#    Then, invoke the command line with the &quot;demo&quot; profile:
+#
+#buildozer --profile demo android debug
+
+</code></pre>
+
+<h3 id="3gankivymdbuildozeradb">3.生成对抗网络(GAN)的一键现实转换二次元动画场景迁移项目(基于Kivymd)buildozer安卓打包及adb安卓调试</h3>
+<p>生成对抗网络(GAN)的一键现实转换二次元动画场景迁移项目的安卓打包与上一节中介绍的完全一致，这里仅把<code>buildozer.spec</code>文件的内容做详细的介绍,其在安卓手机上的运行可以参考第5章或我们的在线课程演示</p>
+<pre><code>[app]
+
+# (str) Title of your application
+title = GAN二次元
+
+# (str) Package name
+package.name = ganapp
+
+# (str) Package domain (needed for android/ios packaging)
+package.domain = com.xujing
+
+# (str) Source code where the main.py live
+source.dir = .
+
+# (list) Source files to include (let empty to include all the files)
+source.include_exts = py,png,jpg,kv,atlas,ttf,ico,gif
+
+# (list) List of inclusions using pattern matching
+#source.include_patterns = assets/*,images/*.png
+source.include_patterns = static/*
+
+
+# (list) Source files to exclude (let empty to not exclude anything)
+#source.exclude_exts = spec
+
+# (list) List of directory to exclude (let empty to not exclude anything)
+#source.exclude_dirs = tests, bin, venv
+
+# (list) List of exclusions using pattern matching
+#source.exclude_patterns = license,images/*/*.jpg
+
+# (str) Application versioning (method 1)
+version = 1.0.0
+
+# (str) Application versioning (method 2)
+# version.regex = __version__ = ['&quot;](.*)['&quot;]
+# version.filename = %(source.dir)s/main.py
+
+# (list) Application requirements
+# comma separated e.g. requirements = sqlite3,kivy
+requirements = python3==3.7.5,hostpython3==3.7.5,kivy,kivymd,opencv,numpy,requests,Pillow,urllib3,chardet,idna
+
+# (str) Custom source folders for requirements
+# Sets custom source for any requirements with recipes
+# requirements.source.kivy = ../../kivy
+
+# (str) Presplash of the application
+#presplash.filename = %(source.dir)s/data/presplash.png
+
+# (str) Icon of the application
+icon.filename = %(source.dir)s/static/icon.png
+
+# (str) Supported orientation (one of landscape, sensorLandscape, portrait or all)
+orientation = portrait
+
+# (list) List of service to declare
+#services = NAME:ENTRYPOINT_TO_PY,NAME2:ENTRYPOINT2_TO_PY
+
+#
+# OSX Specific
+#
+
+#
+# author = © Copyright Info
+
+# change the major version of python used by the app
+osx.python_version = 3
+
+# Kivy version to use
+osx.kivy_version = 1.9.1
+
+#
+# Android specific
+#
+
+# (bool) Indicate if the application should be fullscreen or not
+fullscreen = 0
+
+# (string) Presplash background color (for new android toolchain)
+# Supported formats are: #RRGGBB #AARRGGBB or one of the following names:
+# red, blue, green, black, white, gray, cyan, magenta, yellow, lightgray,
+# darkgray, grey, lightgrey, darkgrey, aqua, fuchsia, lime, maroon, navy,
+# olive, purple, silver, teal.
+#android.presplash_color = #FFFFFF
+
+# (list) Permissions
+#android.permissions = INTERNET,
+
+# (int) Target Android API, should be as high as possible.
+#android.api = 27
+
+# (int) Minimum API your APK will support.
+#android.minapi = 21
+
+# (int) Android SDK version to use
+#android.sdk = 20
+
+# (str) Android NDK version to use
+#android.ndk = 19b
+
+# (int) Android NDK API to use. This is the minimum API your app will support, it should usually match android.minapi.
+#android.ndk_api = 21
+
+# (bool) Use --private data storage (True) or --dir public storage (False)
+#android.private_storage = True
+
+# (str) Android NDK directory (if empty, it will be automatically downloaded.)
+#android.ndk_path =
+
+# (str) Android SDK directory (if empty, it will be automatically downloaded.)
+#android.sdk_path =
+
+# (str) ANT directory (if empty, it will be automatically downloaded.)
+#android.ant_path =
+
+# (bool) If True, then skip trying to update the Android sdk
+# This can be useful to avoid excess Internet downloads or save time
+# when an update is due and you just want to test/build your package
+# android.skip_update = False
+
+# (bool) If True, then automatically accept SDK license
+# agreements. This is intended for automation only. If set to False,
+# the default, you will be shown the license when first running
+# buildozer.
+# android.accept_sdk_license = False
+
+# (str) Android entry point, default is ok for Kivy-based app
+#android.entrypoint = org.renpy.android.PythonActivity
+
+# (str) Android app theme, default is ok for Kivy-based app
+# android.apptheme = &quot;@android:style/Theme.NoTitleBar&quot;
+
+# (list) Pattern to whitelist for the whole project
+#android.whitelist =
+
+# (str) Path to a custom whitelist file
+#android.whitelist_src =
+
+# (str) Path to a custom blacklist file
+#android.blacklist_src =
+
+# (list) List of Java .jar files to add to the libs so that pyjnius can access
+# their classes. Don't add jars that you do not need, since extra jars can slow
+# down the build process. Allows wildcards matching, for example:
+# OUYA-ODK/libs/*.jar
+#android.add_jars = foo.jar,bar.jar,path/to/more/*.jar
+
+# (list) List of Java files to add to the android project (can be java or a
+# directory containing the files)
+#android.add_src =
+
+# (list) Android AAR archives to add (currently works only with sdl2_gradle
+# bootstrap)
+#android.add_aars =
+
+# (list) Gradle dependencies to add (currently works only with sdl2_gradle
+# bootstrap)
+#android.gradle_dependencies =
+
+# (list) add java compile options
+# this can for example be necessary when importing certain java libraries using the 'android.gradle_dependencies' option
+# see https://developer.android.com/studio/write/java8-support for further information
+# android.add_compile_options = &quot;sourceCompatibility = 1.8&quot;, &quot;targetCompatibility = 1.8&quot;
+
+# (list) Gradle repositories to add {can be necessary for some android.gradle_dependencies}
+# please enclose in double quotes 
+# e.g. android.gradle_repositories = &quot;maven { url 'https://kotlin.bintray.com/ktor' }&quot;
+#android.add_gradle_repositories =
+
+# (list) packaging options to add 
+# see https://google.github.io/android-gradle-dsl/current/com.android.build.gradle.internal.dsl.PackagingOptions.html
+# can be necessary to solve conflicts in gradle_dependencies
+# please enclose in double quotes 
+# e.g. android.add_packaging_options = &quot;exclude 'META-INF/common.kotlin_module'&quot;, &quot;exclude 'META-INF/*.kotlin_module'&quot;
+#android.add_gradle_repositories =
+
+# (list) Java classes to add as activities to the manifest.
+#android.add_activities = com.example.ExampleActivity
+
+# (str) OUYA Console category. Should be one of GAME or APP
+# If you leave this blank, OUYA support will not be enabled
+#android.ouya.category = GAME
+
+# (str) Filename of OUYA Console icon. It must be a 732x412 png image.
+#android.ouya.icon.filename = %(source.dir)s/data/ouya_icon.png
+
+# (str) XML file to include as an intent filters in &lt;activity&gt; tag
+#android.manifest.intent_filters =
+
+# (str) launchMode to set for the main activity
+#android.manifest.launch_mode = standard
+
+# (list) Android additional libraries to copy into libs/armeabi
+#android.add_libs_armeabi = libs/android/*.so
+#android.add_libs_armeabi_v7a = libs/android-v7/*.so
+#android.add_libs_arm64_v8a = libs/android-v8/*.so
+#android.add_libs_x86 = libs/android-x86/*.so
+#android.add_libs_mips = libs/android-mips/*.so
+
+# (bool) Indicate whether the screen should stay on
+# Don't forget to add the WAKE_LOCK permission if you set this to True
+#android.wakelock = False
+
+# (list) Android application meta-data to set (key=value format)
+#android.meta_data =
+
+# (list) Android library project to add (will be added in the
+# project.properties automatically.)
+#android.library_references =
+
+# (list) Android shared libraries which will be added to AndroidManifest.xml using &lt;uses-library&gt; tag
+#android.uses_library =
+
+# (str) Android logcat filters to use
+#android.logcat_filters = *:S python:D
+
+# (bool) Copy library instead of making a libpymodules.so
+#android.copy_libs = 1
+
+# (str) The Android arch to build for, choices: armeabi-v7a, arm64-v8a, x86, x86_64
+android.arch = armeabi-v7a
+
+# (int) overrides automatic versionCode computation (used in build.gradle)
+# this is not the same as app version and should only be edited if you know what you're doing
+# android.numeric_version = 1
+
+#
+# Python for android (p4a) specific
+#
+
+# (str) python-for-android fork to use, defaults to upstream (kivy)
+#p4a.fork = kivy
+
+# (str) python-for-android branch to use, defaults to master
+#p4a.branch = master
+
+# (str) python-for-android git clone directory (if empty, it will be automatically cloned from github)
+#p4a.source_dir =
+
+# (str) The directory in which python-for-android should look for your own build recipes (if any)
+#p4a.local_recipes =
+
+# (str) Filename to the hook for p4a
+#p4a.hook =
+
+# (str) Bootstrap to use for android builds
+# p4a.bootstrap = sdl2
+
+# (int) port number to specify an explicit --port= p4a argument (eg for bootstrap flask)
+#p4a.port =
+
+
+#
+# iOS specific
+#
+
+# (str) Path to a custom kivy-ios folder
+#ios.kivy_ios_dir = ../kivy-ios
+# Alternately, specify the URL and branch of a git checkout:
+ios.kivy_ios_url = https://github.com/kivy/kivy-ios
+ios.kivy_ios_branch = master
+
+# Another platform dependency: ios-deploy
+# Uncomment to use a custom checkout
+#ios.ios_deploy_dir = ../ios_deploy
+# Or specify URL and branch
+ios.ios_deploy_url = https://github.com/phonegap/ios-deploy
+ios.ios_deploy_branch = 1.10.0
+
+# (bool) Whether or not to sign the code
+ios.codesign.allowed = false
+
+# (str) Name of the certificate to use for signing the debug version
+# Get a list of available identities: buildozer ios list_identities
+#ios.codesign.debug = &quot;iPhone Developer: &lt;lastname&gt; &lt;firstname&gt; (&lt;hexstring&gt;)&quot;
+
+# (str) Name of the certificate to use for signing the release version
+#ios.codesign.release = %(ios.codesign.debug)s
+
+
+[buildozer]
+
+# (int) Log level (0 = error only, 1 = info, 2 = debug (with command output))
+log_level = 2
+
+# (int) Display warning if buildozer is run as root (0 = False, 1 = True)
+warn_on_root = 1
+
+# (str) Path to build artifact storage, absolute or relative to spec file
+# build_dir = ./.buildozer
+
+# (str) Path to build output (i.e. .apk, .ipa) storage
+# bin_dir = ./bin
+
+#    -----------------------------------------------------------------------------
+#    List as sections
+#
+#    You can define all the &quot;list&quot; as [section:key].
+#    Each line will be considered as a option to the list.
+#    Let's take [app] / source.exclude_patterns.
+#    Instead of doing:
+#
+#[app]
+#source.exclude_patterns = license,data/audio/*.wav,data/images/original/*
+#
+#    This can be translated into:
+#
+#[app:source.exclude_patterns]
+#license
+#data/audio/*.wav
+#data/images/original/*
+#
+
+
+#    -----------------------------------------------------------------------------
+#    Profiles
+#
+#    You can extend section / key with a profile
+#    For example, you want to deploy a demo version of your application without
+#    HD content. You could first change the title to add &quot;(demo)&quot; in the name
+#    and extend the excluded directories to remove the HD content.
+#
+#[app@demo]
+#title = My Application (demo)
+#
+#[app:source.exclude_patterns@demo]
+#images/hd/*
+#
+#    Then, invoke the command line with the &quot;demo&quot; profile:
+#
+#buildozer --profile demo android debug
+
+
+</code></pre>
               
             </div>
           </div>
