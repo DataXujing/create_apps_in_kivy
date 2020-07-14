@@ -1,100 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
-    
     <url>
-     <loc>/about/</loc>
+     <loc>None</loc>
      <lastmod>2020-07-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
-    
-
-    
     <url>
-     <loc>/</loc>
+     <loc>None</loc>
      <lastmod>2020-07-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
-    
-
-    
     <url>
-     <loc>/chapter1/</loc>
+     <loc>None</loc>
      <lastmod>2020-07-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
-    
-
-    
     <url>
-     <loc>/chapter2/</loc>
+     <loc>None</loc>
      <lastmod>2020-07-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
-    
-
-    
     <url>
-     <loc>/chapter3/</loc>
+     <loc>None</loc>
      <lastmod>2020-07-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
-    
-
-    
     <url>
-     <loc>/chapter4/</loc>
+     <loc>None</loc>
      <lastmod>2020-07-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
-    
-
-    
     <url>
-     <loc>/chapter5/</loc>
+     <loc>None</loc>
      <lastmod>2020-07-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
-    
-
-    
     <url>
-     <loc>/chapter6/</loc>
+     <loc>None</loc>
      <lastmod>2020-07-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
-    
-
-    
     <url>
-     <loc>/chapter7/</loc>
+     <loc>None</loc>
      <lastmod>2020-07-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
-    
-
-    
     <url>
-     <loc>/chapter8/</loc>
+     <loc>None</loc>
      <lastmod>2020-07-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
-    
-
-    
     <url>
-     <loc>/chapter9/</loc>
+     <loc>None</loc>
      <lastmod>2020-07-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
-    
-
-    
     <url>
-     <loc>/chapter10/</loc>
+     <loc>None</loc>
      <lastmod>2020-07-14</lastmod>
      <changefreq>daily</changefreq>
     </url>
-    
-
 </urlset>
