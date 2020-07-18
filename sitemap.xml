@@ -1,63 +1,100 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+    
     <url>
-     <loc>None</loc>
-     <lastmod>2020-07-14</lastmod>
+     <loc>/about/</loc>
+     <lastmod>2020-07-18</lastmod>
      <changefreq>daily</changefreq>
     </url>
+    
+
+    
     <url>
-     <loc>None</loc>
-     <lastmod>2020-07-14</lastmod>
+     <loc>/</loc>
+     <lastmod>2020-07-18</lastmod>
      <changefreq>daily</changefreq>
     </url>
+    
+
+    
     <url>
-     <loc>None</loc>
-     <lastmod>2020-07-14</lastmod>
+     <loc>/chapter1/</loc>
+     <lastmod>2020-07-18</lastmod>
      <changefreq>daily</changefreq>
     </url>
+    
+
+    
     <url>
-     <loc>None</loc>
-     <lastmod>2020-07-14</lastmod>
+     <loc>/chapter2/</loc>
+     <lastmod>2020-07-18</lastmod>
      <changefreq>daily</changefreq>
     </url>
+    
+
+    
     <url>
-     <loc>None</loc>
-     <lastmod>2020-07-14</lastmod>
+     <loc>/chapter3/</loc>
+     <lastmod>2020-07-18</lastmod>
      <changefreq>daily</changefreq>
     </url>
+    
+
+    
     <url>
-     <loc>None</loc>
-     <lastmod>2020-07-14</lastmod>
+     <loc>/chapter4/</loc>
+     <lastmod>2020-07-18</lastmod>
      <changefreq>daily</changefreq>
     </url>
+    
+
+    
     <url>
-     <loc>None</loc>
-     <lastmod>2020-07-14</lastmod>
+     <loc>/chapter5/</loc>
+     <lastmod>2020-07-18</lastmod>
      <changefreq>daily</changefreq>
     </url>
+    
+
+    
     <url>
-     <loc>None</loc>
-     <lastmod>2020-07-14</lastmod>
+     <loc>/chapter6/</loc>
+     <lastmod>2020-07-18</lastmod>
      <changefreq>daily</changefreq>
     </url>
+    
+
+    
     <url>
-     <loc>None</loc>
-     <lastmod>2020-07-14</lastmod>
+     <loc>/chapter7/</loc>
+     <lastmod>2020-07-18</lastmod>
      <changefreq>daily</changefreq>
     </url>
+    
+
+    
     <url>
-     <loc>None</loc>
-     <lastmod>2020-07-14</lastmod>
+     <loc>/chapter8/</loc>
+     <lastmod>2020-07-18</lastmod>
      <changefreq>daily</changefreq>
     </url>
+    
+
+    
     <url>
-     <loc>None</loc>
-     <lastmod>2020-07-14</lastmod>
+     <loc>/chapter9/</loc>
+     <lastmod>2020-07-18</lastmod>
      <changefreq>daily</changefreq>
     </url>
+    
+
+    
     <url>
-     <loc>None</loc>
-     <lastmod>2020-07-14</lastmod>
+     <loc>/chapter10/</loc>
+     <lastmod>2020-07-18</lastmod>
      <changefreq>daily</changefreq>
     </url>
+    
+
 </urlset>

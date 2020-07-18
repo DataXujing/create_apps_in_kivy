@@ -7,26 +7,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="None">
   <meta name="author" content="徐静">
-  <link rel="shortcut icon" href="icon.ico">
+  <link rel="shortcut icon" href="./icon.ico">
   
   <title>前言 - Python Kivy创建Apps</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
-  <link rel="stylesheet" href="css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="css/theme_extra.css" type="text/css" />
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  <link rel="stylesheet" href="./css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="./css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="./css/highlight.css">
   
   <script>
     // Current page data
     var mkdocs_page_name = "\u524d\u8a00";
     var mkdocs_page_input_path = "index.md";
-    var mkdocs_page_url = null;
+    var mkdocs_page_url = "/";
   </script>
   
-  <script src="js/jquery-2.1.1.min.js" defer></script>
-  <script src="js/modernizr-2.8.3.min.js" defer></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script> 
+  <script src="./js/jquery-2.1.1.min.js"></script>
+  <script src="./js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="./js/highlight.pack.js"></script> 
   
 </head>
 
@@ -37,10 +36,10 @@
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
       <div class="wy-side-nav-search">
-        <a href="." class="icon icon-home"> Python Kivy创建Apps</a>
+        <a href="about/" class="icon icon-home"> Python Kivy创建Apps</a>
         <div role="search">
   <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+    <input type="text" name="q" placeholder="Search docs" />
   </form>
 </div>
       </div>
@@ -59,7 +58,7 @@
     <a class="current" href=".">前言</a>
     <ul class="subnav">
             
-    <li class="toctree-l2"><a href="#_1">前言</a></li>
+    <li class="toctree-l2"><a href="#_1">前言 </a></li>
     
 
     </ul>
@@ -125,7 +124,7 @@
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href=".">Python Kivy创建Apps</a>
+        <a href="about/">Python Kivy创建Apps</a>
       </nav>
 
       
@@ -133,7 +132,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href=".">Docs</a> &raquo;</li>
+    <li><a href="about/">Docs</a> &raquo;</li>
     
       
     
@@ -150,11 +149,7 @@
           <div role="main">
             <div class="section">
               
-                <h2 id="_1">前言</h2>
-<div align=center>
-<img src="../img/kivy-icon-256.png" /> 
-</div>
-
+                <h2 id="_1">前言 <img src="logo.png" align="right" alt="logo" height="150" width="150" /></h2>
 <p>课程特点：</p>
 <ul>
 <li>完全基于Python,快速实现Windows,Linux, MacOs, ios, Android跨平台GUI，NUI APP开发</li>
@@ -177,6 +172,71 @@
 <li>基于kivy的智能车道线检测APP开发</li>
 <li>基于kivymd的GAN一键现实转二次元动画场景迁移APP开发</li>
 <li>kivy的安卓apk打包和Window可执行文件打包</li>
+</ul>
+<p><strong>1.kivy介绍</strong></p>
+<ul>
+<li>1.kivy框架介绍及kivy与PyQt5的对比</li>
+<li>2.kivy学习资源介绍(包括 官网，中文文档，书籍，B站资源分享）</li>
+<li>3.kivymd的简单介绍</li>
+<li>4.课程实现APP效果展示（包括PyQt5程序和本课程的程序)</li>
+<li>5.打包方式：3种android打包方式，pyinstaller和nuitka打包及其他们的优缺点</li>
+</ul>
+<p><strong>2.涂鸦画板项目基于kivy实现</strong></p>
+<ul>
+<li>1.项目展示与显示画笔的轨迹</li>
+<li>2.设置颜色的Button</li>
+<li>3.设置线宽的Button</li>
+<li>4.按钮边框的设置</li>
+<li>5.屏幕清除功能的实现</li>
+<li>6.中文显示问题及替换icon和title</li>
+<li>7.项目总结</li>
+</ul>
+<p><strong>3.涂鸦画板项目基于kivymd实现</strong></p>
+<ul>
+<li>1.项目展示与画板整体界面</li>
+<li>2.改变线宽MDFloatingActionButtonSpeedDial的实现</li>
+<li>3.清除功能MDFloatingActionButton的实现</li>
+<li>4.改变颜色MDRoundFlatButton的实现</li>
+<li>5.项目总结</li>
+</ul>
+<p><strong>4.智能车道线检测项目(基于Kivy)</strong></p>
+<ul>
+<li>1.车道线检测的OpenCV实现</li>
+<li>2.项目展示及Index页面开发</li>
+<li>3.图像车道线检测页面开发</li>
+<li>4.手机摄像头视频流车道线监测开发</li>
+<li>5.项目总结</li>
+</ul>
+<p><strong>5.基于生成对抗网络(GAN)的一键现实转换二次元动画场景迁移项目(基于Kivymd)</strong></p>
+<ul>
+<li>1.CartoonGAN的Flask部署与测试</li>
+<li>2.Kivymd定义主界面</li>
+<li>3.Home界面的实现</li>
+<li>4.UPLOADIMAGE功能的实现</li>
+<li>5.DOWNLOAD功能的实现</li>
+<li>6.项目总结</li>
+</ul>
+<p><strong>6.pyinstaller打包Windows桌面应用程序</strong></p>
+<ul>
+<li>以智能车道线检测项目Windows打包为例</li>
+</ul>
+<p><strong>7.setupfactory安装程序打包</strong></p>
+<p><strong>8.p4a Android打包基于kivy的涂鸦画板项目</strong></p>
+<ul>
+<li>1.基于Kivy开发的涂鸦画板项目的p4a安卓打包及项目演示</li>
+<li>2.MUMU安卓模拟器及adb_server.exe调试</li>
+<li>3.adb安卓调试</li>
+</ul>
+<p><strong>9.buildozer Android打包基于kivymd的涂鸦画板项目</strong></p>
+<ul>
+<li>1.基于Kivy开发的涂鸦画板buildozer安卓打包及在adb下进行安卓调试</li>
+<li>2.基于智能车道线监测项目的buildozer安卓打包及adb安卓调试</li>
+<li>3.生成对抗网络(GAN)的一键现实转换二次元动画场景迁移项目(基Kivymd)buildozer安卓打包及adb调试</li>
+</ul>
+<p><strong>10.总结加项目展示</strong></p>
+<ul>
+<li>1.最后的作业</li>
+<li>2.附件： 基于PyQt5的AI京剧换脸软件的源码和演示</li>
 </ul>
               
             </div>
@@ -224,13 +284,14 @@
     </span>
 </div>
     <script>var base_url = '.';</script>
-    <script src="js/theme.js" defer></script>
-      <script src="search/main.js" defer></script>
+    <script src="./js/theme.js"></script>
+      <script src="./search/require.js"></script>
+      <script src="./search/search.js"></script>
 
 </body>
 </html>
 
 <!--
-MkDocs version : 1.0.4
-Build Date UTC : 2020-07-14 03:49:26
+MkDocs version : 0.17.3
+Build Date UTC : 2020-07-18 12:17:05
 -->
