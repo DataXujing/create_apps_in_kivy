@@ -5,7 +5,7 @@
 
 ### 1.项目展示与画板整体界面
 
-我们进一步对涂鸦画板在界面层面上做优化，我们使用kivymd库进行界面的优化，kivymd是与Material Desugn兼容的小部件的集合，可与kivy一起使用，kivymd的目标是在不牺牲易用性或应用程序性能的前提下，尽可能接近Google的Material Design规范。kivymd的原作者三年前停止更新项目，<https://github.com/HeaTTheatR/KivyMD>对kivymd进行进一步的开发，目前该项目仍然处于测试版的阶段。
+我们进一步对涂鸦画板在界面层面上做优化，我们使用kivymd库进行界面的优化，kivymd是与Material Desugn兼容的小控件的集合，可与kivy一起使用，kivymd的目标是在不牺牲易用性或应用程序性能的前提下，尽可能接近Google的Material Design规范。kivymd的原作者三年前停止更新项目，<https://github.com/HeaTTheatR/KivyMD>对kivymd进行进一步的开发，目前该项目仍然处于测试版的阶段。
 
 首先我们使用kivymd构建界面，创建`main.py`
 

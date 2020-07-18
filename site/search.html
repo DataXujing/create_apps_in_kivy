@@ -14,11 +14,12 @@
 
   <link rel="stylesheet" href="./css/theme.css" type="text/css" />
   <link rel="stylesheet" href="./css/theme_extra.css" type="text/css" />
-  <link rel="stylesheet" href="./css/highlight.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
   
-  <script src="./js/jquery-2.1.1.min.js"></script>
-  <script src="./js/modernizr-2.8.3.min.js"></script>
-  <script type="text/javascript" src="./js/highlight.pack.js"></script> 
+  <script src="./js/jquery-2.1.1.min.js" defer></script>
+  <script src="./js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
   
 </head>
 
@@ -29,10 +30,10 @@
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
       <div class="wy-side-nav-search">
-        <a href="about/" class="icon icon-home"> Python Kivy创建Apps</a>
+        <a href="./." class="icon icon-home"> Python Kivy创建Apps</a>
         <div role="search">
   <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
   </form>
 </div>
       </div>
@@ -43,62 +44,62 @@
           
             <li class="toctree-l1">
 		
-    <a class="" href="about/">关于</a>
+    <a class="" href="./about/">关于</a>
 	    </li>
           
             <li class="toctree-l1">
 		
-    <a class="" href=".">前言</a>
+    <a class="" href="./.">前言</a>
 	    </li>
           
             <li class="toctree-l1">
 		
-    <a class="" href="chapter1/">第一章 Kivy简介</a>
+    <a class="" href="./chapter1/">第一章 Kivy简介</a>
 	    </li>
           
             <li class="toctree-l1">
 		
-    <a class="" href="chapter2/">第二章 涂鸦画板项目基于kivy实现</a>
+    <a class="" href="./chapter2/">第二章 涂鸦画板项目基于kivy实现</a>
 	    </li>
           
             <li class="toctree-l1">
 		
-    <a class="" href="chapter3/">第三章 涂鸦画板项目基于kivymd实现</a>
+    <a class="" href="./chapter3/">第三章 涂鸦画板项目基于kivymd实现</a>
 	    </li>
           
             <li class="toctree-l1">
 		
-    <a class="" href="chapter4/">第四章 智能车道线检测项目(基于Kivy)</a>
+    <a class="" href="./chapter4/">第四章 智能车道线检测项目(基于Kivy)</a>
 	    </li>
           
             <li class="toctree-l1">
 		
-    <a class="" href="chapter5/">第五章 基于生成对抗网络(GAN)的一键现实转换二次元动画场景迁移项目(基于Kivymd)</a>
+    <a class="" href="./chapter5/">第五章 基于生成对抗网络(GAN)的一键现实转换二次元动画场景迁移项目(基于Kivymd)</a>
 	    </li>
           
             <li class="toctree-l1">
 		
-    <a class="" href="chapter6/">第六章 pyinstaller打包Windows桌面应用程序</a>
+    <a class="" href="./chapter6/">第六章 pyinstaller打包Windows桌面应用程序</a>
 	    </li>
           
             <li class="toctree-l1">
 		
-    <a class="" href="chapter7/">第七章 setupfactory安装程序打包</a>
+    <a class="" href="./chapter7/">第七章 setupfactory安装程序打包</a>
 	    </li>
           
             <li class="toctree-l1">
 		
-    <a class="" href="chapter8/">第八章 p4a Android打包基于kivy的涂鸦画板项目</a>
+    <a class="" href="./chapter8/">第八章 p4a Android打包基于kivy的涂鸦画板项目</a>
 	    </li>
           
             <li class="toctree-l1">
 		
-    <a class="" href="chapter9/">第九章 buildozer Android打包基于kivymd的涂鸦画板项目</a>
+    <a class="" href="./chapter9/">第九章 buildozer Android打包基于kivymd的涂鸦画板项目</a>
 	    </li>
           
             <li class="toctree-l1">
 		
-    <a class="" href="chapter10/">第十章 总结及项目展示</a>
+    <a class="" href="./chapter10/">第十章 总结及项目展示</a>
 	    </li>
           
         </ul>
@@ -111,7 +112,7 @@
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="about/">Python Kivy创建Apps</a>
+        <a href="./.">Python Kivy创建Apps</a>
       </nav>
 
       
@@ -119,7 +120,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href="about/">Docs</a> &raquo;</li>
+    <li><a href="./.">Docs</a> &raquo;</li>
     
     
     <li class="wy-breadcrumbs-aside">
@@ -136,7 +137,7 @@
 
   <form id="content_search" action="search.html">
     <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
-    <input name="q" id="mkdocs-search-query" type="text" class="search_input search-query ui-autocomplete-input" placeholder="Search the Docs" autocomplete="off" autofocus>
+    <input name="q" id="mkdocs-search-query" type="text" class="search_input search-query ui-autocomplete-input" placeholder="Search the Docs" autocomplete="off" autofocus title="Type search term here">
   </form>
 
   <div id="mkdocs-search-results" class="search-results">
@@ -176,9 +177,8 @@
     </span>
 </div>
     <script>var base_url = '.';</script>
-    <script src="./js/theme.js"></script>
-      <script src="./search/require.js"></script>
-      <script src="./search/search.js"></script>
+    <script src="./js/theme.js" defer></script>
+      <script src="./search/main.js" defer></script>
 
 </body>
 </html>

@@ -14,18 +14,19 @@
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
-  <link rel="stylesheet" href="../css/highlight.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
   
   <script>
     // Current page data
     var mkdocs_page_name = "\u7b2c\u4e94\u7ae0 \u57fa\u4e8e\u751f\u6210\u5bf9\u6297\u7f51\u7edc(GAN)\u7684\u4e00\u952e\u73b0\u5b9e\u8f6c\u6362\u4e8c\u6b21\u5143\u52a8\u753b\u573a\u666f\u8fc1\u79fb\u9879\u76ee(\u57fa\u4e8eKivymd)";
     var mkdocs_page_input_path = "chapter5.md";
-    var mkdocs_page_url = "/chapter5/";
+    var mkdocs_page_url = null;
   </script>
   
-  <script src="../js/jquery-2.1.1.min.js"></script>
-  <script src="../js/modernizr-2.8.3.min.js"></script>
-  <script type="text/javascript" src="../js/highlight.pack.js"></script> 
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
   
 </head>
 
@@ -36,10 +37,10 @@
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
       <div class="wy-side-nav-search">
-        <a href="../about/" class="icon icon-home"> Python Kivy创建Apps</a>
+        <a href=".." class="icon icon-home"> Python Kivy创建Apps</a>
         <div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
   </form>
 </div>
       </div>
@@ -85,6 +86,22 @@
             
     <li class="toctree-l2"><a href="#gankivymd">第五章 基于生成对抗网络(GAN)的一键现实转换二次元动画场景迁移项目(基于Kivymd)</a></li>
     
+        <ul>
+        
+            <li><a class="toctree-l3" href="#1cartoonganfalsk">1.CartoonGAN的Falsk部署与测试</a></li>
+        
+            <li><a class="toctree-l3" href="#2kivymd">2.kivymd定义主界面</a></li>
+        
+            <li><a class="toctree-l3" href="#3home">3.Home界面的实现</a></li>
+        
+            <li><a class="toctree-l3" href="#4uploadimage">4.UPLOADIMAGE功能的实现</a></li>
+        
+            <li><a class="toctree-l3" href="#5download">5.DOWNLOAD功能的实现</a></li>
+        
+            <li><a class="toctree-l3" href="#6">6.项目总结</a></li>
+        
+        </ul>
+    
 
     </ul>
 	    </li>
@@ -124,7 +141,7 @@
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../about/">Python Kivy创建Apps</a>
+        <a href="..">Python Kivy创建Apps</a>
       </nav>
 
       
@@ -132,7 +149,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href="../about/">Docs</a> &raquo;</li>
+    <li><a href="..">Docs</a> &raquo;</li>
     
       
     
@@ -151,6 +168,201 @@
               
                 <h2 id="gankivymd">第五章 基于生成对抗网络(GAN)的一键现实转换二次元动画场景迁移项目(基于Kivymd)</h2>
 <hr />
+<h3 id="1cartoonganfalsk">1.CartoonGAN的Falsk部署与测试</h3>
+<p>为了后期安卓打包的方便，我们将CartoonGAN网络通过WebAPI的方式部署，这里我们采用Flask去部署我们的CartoonGAN,创建<code>flask_app.py</code>其代码如下：</p>
+<pre><code class="python"># encoding: utf-8
+
+'''
+dataxujing
+2020-07-04
+
+基于CartoonGAN的现实迁移二次元动画风格的风格迁移服务
+
+基于Flask,Pytorch
+
+
+'''
+
+import os
+from io import BytesIO
+import numpy as np
+import time
+import cv2
+from PIL import Image
+
+import base64
+import json
+import flask
+from flask import request, Flask
+
+import torch
+import torchvision.transforms as transforms
+from torch.autograd import Variable
+import torchvision.utils as vutils
+from network.Transformer import Transformer
+
+app = Flask(__name__)
+
+# load pretrained model
+model = Transformer()
+
+model_dict = {}
+# [宫崎骏, 细田守, 盗梦侦探（日本动画名）, 新海诚]
+for model_name in [&quot;Hayao&quot;,&quot;Hosoda&quot;,&quot;Paprika&quot;,&quot;Shinkai&quot;]:
+    # globals()['model_'+model_name] = Transformer().load_state_dict(torch.load(os.path.join(&quot;./static/model&quot;, model_name + '_net_G_float.pth'))).eval()
+
+    globals()['model_'+model_name] = Transformer()
+    globals()['model_'+model_name].load_state_dict(torch.load(os.path.join(&quot;./static/model&quot;, model_name + '_net_G_float.pth')))
+
+# 测试接口
+@app.route(&quot;/test/&lt;name&gt;&quot;,methods=[&quot;GET&quot;,&quot;POST&quot;])
+def test(name):
+    return &quot;Test Get: {}&quot;.format(name)
+
+
+# model_name example: model_Hayao
+@app.route(&quot;/predict/&lt;model_name&gt;&quot;, methods=[&quot;GET&quot;,&quot;POST&quot;])
+def transfor_cartoon(model_name):
+
+    try:
+        #解析图片数据
+        image_b64 = base64.b64decode(str(request.form['image']))
+        image_data = np.fromstring(image_b64, np.uint8)
+        # image_data = cv2.imdecode(image_data, cv2.IMREAD_COLOR)
+        # cv2.imwrite('/root/01.png', image_data)
+
+        input_image = Image.open(BytesIO(image_data)).convert('RGB')
+
+        # 开始识别
+        model = globals()[model_name].eval()
+        device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
+        # 图像处理
+        h = input_image.size[0]
+        w = input_image.size[1]
+        ratio = h *1.0 / w
+        # 将长边缩小到450
+        if ratio &gt; 1:
+            h = 450
+            w = int(h*1.0/ratio)
+        else:
+            w = 450
+            h = int(w * ratio)
+        input_image = input_image.resize((h, w), Image.BICUBIC)
+        input_image = np.asarray(input_image)
+        # RGB -&gt; BGR
+        input_image = input_image[:, :, [2, 1, 0]]
+        input_image = transforms.ToTensor()(input_image).unsqueeze(0)
+        # preprocess, (-1, 1)
+        input_image = -1 + 2 * input_image 
+
+        if torch.cuda.is_available():
+            model.cuda()
+            input_image = Variable(input_image).cuda()
+        else:
+            model.float()
+            input_image = Variable(input_image).float()
+
+        # forward
+        output_image = model(input_image)
+        output_image = output_image[0]
+        # BGR -&gt; RGB
+        output_image = output_image[[2, 1, 0], :, :]
+        # deprocess, (0, 1)
+        output_image = output_image.data.cpu().float() * 0.5 + 0.5
+        # save
+        # vutils.save_image(output_image, os.path.join(opt.output_dir, files[:-4] + '_' + opt.style + '.jpg'))
+
+        # 去掉batch size维度
+        output_image = output_image.squeeze()
+        # 从[0,1]转化为[0,255]，再从CHW转为HWC，最后转为cv2
+        output_image = output_image.mul_(255).add_(0.5).clamp_(0, 255).permute(1, 2, 0).type(torch.uint8).numpy()
+        # RGB转BRG
+        output_image_cv2 = cv2.cvtColor(output_image, cv2.COLOR_RGB2BGR)
+
+        # opencv 转 base64
+        image = cv2.imencode('.jpg', output_image_cv2)[1]
+        base64_data = str(base64.b64encode(image))[2:-1]
+
+        res = {&quot;pred&quot;:base64_data,&quot;code&quot;:&quot;200&quot;}
+
+    except Exception as e:
+        print(str(e))
+        res = {'pred': &quot;we loss&quot;, 'code': &quot;404&quot;}
+
+    return json.dumps(res)
+
+
+if __name__ == &quot;__main__&quot;:
+    app.run(debug=True,host=&quot;0.0.0.0&quot;,port=8080)
+
+</code></pre>
+
+<p>测试我们的Flask WebAPI,创建<code>client_test.py</code></p>
+<pre><code class="python">
+'''
+dataxujing
+2020-07-04
+
+请求Flask CartoonGAN服务的测试代码
+用来验证Web服务的正常
+'''
+
+
+import requests
+import base64
+import json
+from PIL import Image
+import cv2
+import numpy as np
+
+#将图片数据转成base64格式
+with open('./static/test_image/test.jpg', 'rb') as f:
+    img = base64.b64encode(f.read()).decode()
+image = []
+image.append(img)
+res = {&quot;image&quot;:image}
+
+#访问服务
+# model: &quot;model_Hayao&quot;(宫崎骏),&quot;model_Hosoda&quot;,&quot;model_Paprika&quot;,&quot;model_Shinkai&quot;
+url = &quot;http://10.10.15.106:8080/predict/model_Hayao&quot;
+headers = {'user-agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.131 Safari/537.36'}
+res_back = requests.post(url,data=res,headers=headers, timeout=200)
+
+
+# save cartoon image
+state = json.loads(res_back.text).get('code')
+if state == &quot;404&quot;:
+    print(&quot;we loss&quot;)
+else:
+    img_bs64 = json.loads(res_back.text).get('pred')
+
+    imgString = base64.b64decode(img_bs64.encode(&quot;ascii&quot;))
+    nparr = np.fromstring(imgString,np.uint8)  
+    image = cv2.imdecode(nparr,cv2.IMREAD_COLOR)
+
+    cv2.imwrite(&quot;test_res.jpg&quot;,image)
+
+</code></pre>
+
+<p>测试结果如下图：</p>
+<p>原图：</p>
+<div align=center>
+<img src="../img/ch5/p1.jpg" width=600/> 
+</div>
+
+<p><br></p>
+<p>风格转化后的Cartoon:</p>
+<div align=center>
+<img src="../img/ch5/p2.jpg" width=600/> 
+</div>
+
+<p><br></p>
+<h3 id="2kivymd">2.kivymd定义主界面</h3>
+<h3 id="3home">3.Home界面的实现</h3>
+<h3 id="4uploadimage">4.UPLOADIMAGE功能的实现</h3>
+<h3 id="5download">5.DOWNLOAD功能的实现</h3>
+<h3 id="6">6.项目总结</h3>
               
             </div>
           </div>
@@ -197,9 +409,8 @@
     </span>
 </div>
     <script>var base_url = '..';</script>
-    <script src="../js/theme.js"></script>
-      <script src="../search/require.js"></script>
-      <script src="../search/search.js"></script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
 
 </body>
 </html>

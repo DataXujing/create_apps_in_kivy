@@ -30,4 +30,7 @@
 + 基于kivymd的GAN一键现实转二次元动画场景迁移APP开发
 + kivy的安卓apk打包和Window可执行文件打包
 
+
+本教程涉及所有源码下载: <https://github.com/DataXujing/create_apps_in_kivy>
+
  
